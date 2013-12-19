@@ -327,16 +327,16 @@
   float output; // The sum of proportional, integral and derivative  
   int maximum = 100; //Fastest possible motor speed
   
-  float KP = kproportional[kproportionalcount];
-  float KI = kintegral[kintegralcount];
-  float KD = kderivative[kderivativecount];
-  
   #define SPEEDRATIO 1  //the ratio of to convert the output to speed
   
   boolean isCorner;
   boolean isTurning = false;
   
   void loop() {
+    float KP = kproportional[kproportionalcount];
+    float KI = kintegral[kintegralcount];
+    float KD = kderivative[kderivativecount];
+    
     // Gives a value between 0 and 4000 based off of the location of the line.
     // The value of 0 means that the line is under one side,
     // 2000 is under the center, and 4000 is on the other side.
@@ -366,13 +366,13 @@
     // to a negative value.
     // Forces -maximum <= output <= maximum
     if (output > maximum) {
-        maximum = 60;
+        maximum = 40;
         output = maximum;
         isCorner = true;
         isTurning = true;
     }
     else if (output < -maximum) {  
-        maximum = 60;
+        maximum = 40;
         output = -maximum;
         isCorner = true;
         isTurning = true;
